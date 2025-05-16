@@ -1,4 +1,4 @@
-package org.example.projet_emplois.util;
+package org.example.projet_emplois.tools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

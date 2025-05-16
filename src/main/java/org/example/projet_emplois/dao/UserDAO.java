@@ -1,7 +1,7 @@
 package org.example.projet_emplois.dao;
 
 import org.example.projet_emplois.model.*;
-import org.example.projet_emplois.util.Database;
+import org.example.projet_emplois.tools.Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,10 +28,10 @@ public class UserDAO {
                     case "admin":
                         return new Admin(id, name, email, password);
                     case "teacher":
-                        String teacherId = "T-" + id; // placeholder
+                        String teacherId = "T-" + id;
                         return new Teacher(id, name, email, password, teacherId);
                     case "student":
-                        String studentId = "S-" + id; // placeholder
+                        String studentId = "S-" + id;
                         return new Student(id, name, email, password, studentId);
                     default:
                         return null;

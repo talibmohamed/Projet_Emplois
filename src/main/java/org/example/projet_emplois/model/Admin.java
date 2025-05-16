@@ -11,6 +11,10 @@ public class Admin extends User {
         return "admin";
     }
 
+    public String getAdminId() {
+        return "A-" + id;
+    }
+
     public void createSchedule() {}
     public void modifySchedule() {}
     public void assignTeacher(Course course, Teacher teacher) {}

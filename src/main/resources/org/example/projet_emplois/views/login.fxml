@@ -9,6 +9,7 @@
       fx:controller="org.example.projet_emplois.controller.LoginController"
       alignment="CENTER"
       spacing="15"
+      maxWidth="300"
       stylesheets="@../styles/style.css">
 
     <Label text="Login" styleClass="header-label"/>

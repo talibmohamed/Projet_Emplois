@@ -7,7 +7,6 @@ public class Student extends User {
 
     public Student(int id, String name, String email, String password, String studentId) {
         super(id, name, email, password);
-        this.studentId = studentId;
     }
 
     @Override
@@ -15,6 +14,9 @@ public class Student extends User {
         return "student";
     }
 
+    public String getStudentId() {
+        return "S-" + id;
+    }
     public List<Schedule> viewSchedule() { return null; }
     public void receiveNotification(String msg) {}
     public String viewRoomInfo() { return ""; }

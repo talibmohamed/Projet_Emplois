@@ -4,15 +4,26 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.projet_emplois.controller.MainController;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/projet_emplois/views/login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Login");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projet_emplois/views/main.fxml"));
+        Scene scene = new Scene(loader.load());
+
+        stage.setTitle("Emploi du Temps");
         stage.setScene(scene);
+
+        // Set minimum width and height
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
+
         stage.show();
+
+        // load login view initially
+        MainController controller = loader.getController();
+        controller.loadDashboard("login");
     }
 
     public static void main(String[] args) {
