@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import org.example.projet_emplois.model.Admin;
 import org.example.projet_emplois.model.User;
 
 import java.io.IOException;
@@ -40,6 +41,12 @@ public class MainController {
             LoginController loginController = loader.getController();
             loginController.setMainController(this);
         }
+
+        if ("admin".equals(role)) {
+            AdminDashboardController dashboardController = loader.getController();
+            dashboardController.setAdmin((Admin) currentUser);
+        }
+
 
         mainPane.setCenter(view);
     }

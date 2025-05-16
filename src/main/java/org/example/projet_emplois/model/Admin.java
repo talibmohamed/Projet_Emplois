@@ -15,7 +15,9 @@ public class Admin extends User {
         return "A-" + id;
     }
 
-    public void createSchedule() {}
+    public void createSchedule() {
+
+    }
     public void modifySchedule() {}
     public void assignTeacher(Course course, Teacher teacher) {}
     public void manageRoom(Room room) {}

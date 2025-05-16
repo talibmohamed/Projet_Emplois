@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      alignment="CENTER"
-      spacing="20"
-      style="-fx-padding: 30;">
-    <Label text="Admin Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
-</VBox>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.projet_emplois.controller.AdminDashboardController"
+            style="-fx-padding: 30;">
+
+    <top>
+        <Label fx:id="welcomeLabel" text="Bienvenue, Admin"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+    </top>
+
+    <center>
+        <TabPane fx:id="adminTabs">
+            <Tab text="Utilisateurs">
+                <Label text="Gérer les utilisateurs" />
+            </Tab>
+            <Tab text="Salles">
+                <Label text="Gérer les salles" />
+            </Tab>
+            <Tab text="Cours">
+                <Label text="Gérer les cours" />
+            </Tab>
+            <Tab text="Emplois du temps">
+                <Label text="Gérer les emplois du temps" />
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
