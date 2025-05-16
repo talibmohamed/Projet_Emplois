@@ -5,7 +5,7 @@ import java.util.List;
 public class Student extends User {
     private String studentId;
 
-    public Student(int id, String name, String email, String password, String studentId) {
+    public Student(int id, String name, String email, String password) {
         super(id, name, email, password);
     }
 

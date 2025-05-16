@@ -7,14 +7,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
     public static User findByEmailAndPassword(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-        try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
 
+        try {
+            conn = Database.getConnection();
+            stmt = conn.prepareStatement(query);
             stmt.setString(1, email);
             stmt.setString(2, password);
 
@@ -28,11 +33,9 @@ public class UserDAO {
                     case "admin":
                         return new Admin(id, name, email, password);
                     case "teacher":
-                        String teacherId = "T-" + id;
-                        return new Teacher(id, name, email, password, teacherId);
+                        return new Teacher(id, name, email, password, "T-" + id);
                     case "student":
-                        String studentId = "S-" + id;
-                        return new Student(id, name, email, password, studentId);
+                        return new Student(id, name, email, password);
                     default:
                         return null;
                 }
@@ -40,6 +43,33 @@ public class UserDAO {
         } catch (SQLException e) {
             System.err.println("[UserDAO] Error: " + e.getMessage());
         }
+
         return null;
     }
+
+
+    public static List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>();
+        String query = "SELECT * FROM users WHERE role = 'student'";
+
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                students.add(new Student(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return students;
+    }
+
 }

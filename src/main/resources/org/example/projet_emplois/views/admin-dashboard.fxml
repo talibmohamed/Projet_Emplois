@@ -18,6 +18,9 @@
             <Tab text="Utilisateurs">
                 <Label text="Gérer les utilisateurs" />
             </Tab>
+            <Tab text="Étudiants">
+                <fx:include source="students-tab.fxml" />
+            </Tab>
             <Tab text="Salles">
                 <Label text="Gérer les salles" />
             </Tab>
@@ -30,3 +33,4 @@
         </TabPane>
     </center>
 </BorderPane>
+

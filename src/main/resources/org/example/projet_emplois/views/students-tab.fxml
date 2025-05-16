@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projet_emplois.controller.AdminStudentsController"
+      spacing="10"
+      alignment="TOP_LEFT"
+      style="-fx-padding: 20;">
+
+    <Label text="Liste des étudiants"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <TableView fx:id="studentsTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="nameColumn" text="Nom" />
+            <TableColumn fx:id="emailColumn" text="Email" />
+        </columns>
+    </TableView>
+
+    <Button text="Ajouter un étudiant" />
+</VBox>
