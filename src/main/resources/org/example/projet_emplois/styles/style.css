@@ -41,3 +41,37 @@
     -fx-text-fill: red;
     -fx-font-size: 12px;
 }
+/* TabPane header background */
+.tab-header-area {
+    -fx-background-color: #dddddd;
+}
+
+/* Tabs base */
+.tab {
+    -fx-background-color: transparent;
+    -fx-padding: 6 15 6 15;
+    -fx-border-color: transparent;
+}
+
+/* Tab label */
+.tab-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #444444;
+}
+
+/* Hover tab */
+.tab:hover {
+    -fx-background-color: #eeeeee;
+}
+
+/* Selected tab */
+.tab:selected {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1 1 0 1;
+}
+
+/* Selected tab label */
+.tab:selected .tab-label {
+    -fx-text-fill: #000000;
+}

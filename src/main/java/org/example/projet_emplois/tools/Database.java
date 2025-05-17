@@ -12,13 +12,13 @@ public class Database {
     private static Connection connection = null;
 
     public static Connection getConnection() {
-        if (connection == null) {
-            try {
+        try {
+            if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
                 System.out.println("[DB] Connected to Supabase PostgreSQL.");
-            } catch (SQLException e) {
-                System.err.println("[DB] Connection failed: " + e.getMessage());
             }
+        } catch (SQLException e) {
+            System.err.println("[DB] Connection failed: " + e.getMessage());
         }
         return connection;
     }

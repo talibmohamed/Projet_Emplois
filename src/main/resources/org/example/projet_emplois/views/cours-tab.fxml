@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projet_emplois.controller.CoursTabController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <!-- Title -->
+    <Label text="Gestion des cours et affectation des enseignants"
+           styleClass="label title" />
+
+    <!-- Editable Course Table -->
+    <TableView fx:id="coursesTable" editable="true" prefHeight="300" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="courseNameColumn" text="Nom du cours" editable="true"/>
+            <TableColumn fx:id="courseTypeColumn" text="Type de cours" editable="true"/>
+            <TableColumn fx:id="teacherColumn" text="Enseignant" editable="false"/>
+        </columns>
+    </TableView>
+
+    <!-- Affectation -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Affecter enseignant :" />
+        <ComboBox fx:id="teacherComboBox" promptText="Choisir un enseignant" styleClass="combo-box"/>
+        <Button fx:id="affecterButton" text="Affecter" onAction="#handleAffecter" styleClass="button" />
+    </HBox>
+
+    <!-- Add/Delete Section -->
+    <Separator />
+    <Label text="Ajouter un nouveau cours"
+           styleClass="label title" />
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Nom du cours:" />
+        <TextField fx:id="courseNameField" promptText="Nom du cours" styleClass="text-field" />
+
+        <Label text="Type:" />
+        <ComboBox fx:id="courseTypeComboBox" promptText="Type" styleClass="combo-box">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="CM"/>
+                    <String fx:value="TD"/>
+                    <String fx:value="TP"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Button fx:id="addButton" text="Ajouter" onAction="#handleAddCourse" styleClass="button" />
+        <Button text="Supprimer" onAction="#handleDeleteCourse" styleClass="button" />
+    </HBox>
+
+    <!-- Feedback -->
+    <Label fx:id="messageLabel" textFill="green" />
+</VBox>

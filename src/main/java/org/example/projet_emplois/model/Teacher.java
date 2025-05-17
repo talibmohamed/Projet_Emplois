@@ -1,11 +1,15 @@
 package org.example.projet_emplois.model;
 
-import java.util.List;
-
 public class Teacher extends User {
 
-    public Teacher(int id, String name, String email, String password, String teacherId) {
+
+    public Teacher(int id, String name, String email, String password) {
         super(id, name, email, password);
+
+    }
+
+    public String getTeacherId() {
+        return "T" + getId();
     }
 
     @Override
@@ -13,11 +17,8 @@ public class Teacher extends User {
         return "teacher";
     }
 
-    public String getTeacherId() {
-        return "T-" + id;
+    @Override
+    public String toString() {
+        return getName(); // or getName() + " (" + getEmail() + ")"
     }
-
-    public List<Schedule> viewSchedule() { return null; }
-    public List<Course> viewCourseDetails() { return null; }
-    public void reportConflict(String message) {}
 }

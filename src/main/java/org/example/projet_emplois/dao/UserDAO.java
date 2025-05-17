@@ -33,7 +33,7 @@ public class UserDAO {
                     case "admin":
                         return new Admin(id, name, email, password);
                     case "teacher":
-                        return new Teacher(id, name, email, password, "T-" + id);
+                        return new Teacher(id, name, email, password);
                     case "student":
                         return new Student(id, name, email, password);
                     default:
@@ -71,5 +71,31 @@ public class UserDAO {
 
         return students;
     }
+
+    //get all teachers
+    public static List<Teacher> getAllTeachers() {
+        List<Teacher> teachers = new ArrayList<>();
+        String query = "SELECT * FROM users WHERE role = 'teacher'";
+
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                teachers.add(new Teacher(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return teachers;
+    }
+
 
 }
