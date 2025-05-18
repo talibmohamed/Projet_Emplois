@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projet_emplois.controller.RoomTabController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Gestion des salles et équipements"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <!-- Table des salles -->
+    <TableView fx:id="roomTable" prefHeight="250">
+        <columns>
+            <TableColumn fx:id="roomNameColumn" text="Nom de salle" prefWidth="200"/>
+            <TableColumn fx:id="roomCapacityColumn" text="Capacité" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <!-- Formulaire d'ajout/modification -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Nom:"/>
+        <TextField fx:id="roomNameField" promptText="Nom de la salle"/>
+        <Label text="Capacité:"/>
+        <Spinner fx:id="capacitySpinner" prefWidth="80"/>
+        <Button text="Ajouter" onAction="#handleAddRoom"/>
+        <Button text="Supprimer" onAction="#handleDeleteRoom"/>
+    </HBox>
+
+    <!-- Équipement assigné à la salle -->
+    <Label text="Équipements disponibles pour la salle sélectionnée:" style="-fx-font-weight: bold;"/>
+    <TableView fx:id="roomEquipmentTable" prefHeight="150">
+        <columns>
+            <TableColumn fx:id="equipmentNameColumn" text="Équipement" prefWidth="200"/>
+            <TableColumn fx:id="equipmentQuantityColumn" text="Quantité" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <!-- Ajouter équipement à une salle -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Équipement:"/>
+        <ComboBox fx:id="equipmentComboBox" promptText="Sélectionner"/>
+        <Label text="Quantité:"/>
+        <TextField fx:id="equipmentQtyField" promptText="Quantité"/>
+        <Button text="Ajouter à la salle" onAction="#handleAssignEquipment"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" textFill="green"/>
+
+    <!-- Gérer les types d'équipements -->
+    <Separator />
+    <Label text="Gérer les équipements disponibles" style="-fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="newEquipmentField" promptText="Nom de l'équipement" />
+        <Button text="Ajouter équipement" onAction="#handleAddEquipmentType" />
+    </HBox>
+
+    <!-- Liste des équipements existants -->
+    <TableView fx:id="equipmentTypeTable" prefHeight="150">
+        <columns>
+            <TableColumn fx:id="equipmentTypeNameColumn" text="Nom de l'équipement" prefWidth="250" />
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="Supprimer équipement sélectionné" onAction="#handleDeleteEquipmentType" />
+    </HBox>
+</VBox>

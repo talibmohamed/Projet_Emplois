@@ -23,7 +23,7 @@
                 <fx:include source="students-tab.fxml" />
             </Tab>
             <Tab text="Salles" closable="false">
-                <Label text="Gérer les salles" />
+                <fx:include source="rooms-tab.fxml" />
             </Tab>
             <Tab text="Cours" closable="false">
                 <fx:include source="cours-tab.fxml" />

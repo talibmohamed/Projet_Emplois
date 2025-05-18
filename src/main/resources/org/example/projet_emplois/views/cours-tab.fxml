@@ -26,10 +26,10 @@
     <!-- Affectation -->
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Affecter enseignant :" />
-        <ComboBox fx:id="teacherComboBox" promptText="Choisir un enseignant" styleClass="combo-box"/>
-        <Button fx:id="affecterButton" text="Affecter" onAction="#handleAffecter" styleClass="button" />
+        <ComboBox fx:id="teacherComboBox" promptText="Choisir un enseignant" />
+        <Button fx:id="affecterButton" text="Affecter" onAction="#handleAffecter" />
+        <Button fx:id="retirerButton" text="Retirer" onAction="#handleRetirerEnseignant" />
     </HBox>
-
     <!-- Add/Delete Section -->
     <Separator />
     <Label text="Ajouter un nouveau cours"

@@ -14,7 +14,7 @@ public class CourseDAO {
 
     public static List<Course> getAllCourses() {
         List<Course> courses = new ArrayList<>();
-        String query = "SELECT c.id, c.name, c.type, u.name AS teacher_name " +
+        String query = "SELECT c.id, c.name, c.type, c.teacher_id, u.name AS teacher_name " +
                 "FROM courses c LEFT JOIN users u ON c.teacher_id = u.id";
 
         Connection conn = Database.getConnection();
@@ -28,10 +28,14 @@ public class CourseDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                int teacherId = rs.getInt("teacher_id");
+                boolean isTeacherNull = rs.wasNull();  // because getInt returns 0 if NULL
+
                 courses.add(new Course(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("type") != null ? rs.getString("type") : "Aucun",
+                        isTeacherNull ? -1 : teacherId,
                         rs.getString("teacher_name") != null ? rs.getString("teacher_name") : "Aucun"
                 ));
             }
@@ -45,7 +49,8 @@ public class CourseDAO {
         return courses;
     }
 
-    public static boolean assignTeacherToCourse(int courseId, int teacherId) {
+
+    public static boolean assignTeacherToCourse(int courseId, Integer teacherId) {
         String query = "UPDATE courses SET teacher_id = ? WHERE id = ?";
         Connection conn = Database.getConnection();
         if (conn == null) {
@@ -53,18 +58,20 @@ public class CourseDAO {
             return false;
         }
 
-        try {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, teacherId);
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            if (teacherId == null || teacherId == -1) {
+                stmt.setNull(1, java.sql.Types.INTEGER);
+            } else {
+                stmt.setInt(1, teacherId);
+            }
             stmt.setInt(2, courseId);
-            boolean success = stmt.executeUpdate() > 0;
-            stmt.close();
-            return success;
+            return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
+
 
     public static boolean addCourse(String name, String type) {
         String query = "INSERT INTO courses (name, type) VALUES (?, ?)";
@@ -110,5 +117,9 @@ public class CourseDAO {
             return false;
         }
     }
+
+
+
+
 
 }

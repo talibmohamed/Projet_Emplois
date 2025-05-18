@@ -26,6 +26,7 @@ public class CoursTabController {
     @FXML private Button affecterButton;
     @FXML private Button addButton;
 
+
     private ObservableList<Course> courseList;
     private ObservableList<Teacher> teacherList;
 
@@ -33,7 +34,7 @@ public class CoursTabController {
     public void initialize() {
         coursesTable.setEditable(true);
 
-        // Course Name – Editable
+        // Editable Course Name
         courseNameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
         courseNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         courseNameColumn.setOnEditCommit(event -> {
@@ -44,7 +45,7 @@ public class CoursTabController {
             messageLabel.setTextFill(javafx.scene.paint.Color.GREEN);
         });
 
-        // Course Type – Editable
+        // Editable Course Type
         courseTypeColumn.setCellValueFactory(data -> data.getValue().typeProperty());
         courseTypeColumn.setCellFactory(ComboBoxTableCell.forTableColumn("CM", "TD", "TP"));
         courseTypeColumn.setOnEditCommit(event -> {
@@ -55,17 +56,18 @@ public class CoursTabController {
             messageLabel.setTextFill(javafx.scene.paint.Color.GREEN);
         });
 
-        // Teacher – READ-ONLY
+        // Read-only Teacher Column
         teacherColumn.setCellValueFactory(data -> data.getValue().teacherNameProperty());
         teacherColumn.setEditable(false);
 
-        // Load courses and teachers
+        // Load courses
         courseList = FXCollections.observableArrayList(CourseDAO.getAllCourses());
         coursesTable.setItems(courseList);
 
-        teacherList = FXCollections.observableArrayList(UserDAO.getAllTeachers());
-        teacherComboBox.setItems(teacherList);
+        // Initial load of teachers
+        refreshTeacherList();
 
+        // Display teacher name in ComboBox
         teacherComboBox.setCellFactory(listView -> new ListCell<>() {
             @Override
             protected void updateItem(Teacher teacher, boolean empty) {
@@ -80,6 +82,9 @@ public class CoursTabController {
                 setText((teacher == null || empty) ? null : teacher.getName());
             }
         });
+
+        // Refresh teachers on click
+        teacherComboBox.setOnShowing(event -> refreshTeacherList());
     }
 
 
@@ -107,6 +112,30 @@ public class CoursTabController {
             showError("Erreur lors de l'affectation.");
         }
     }
+
+    @FXML
+    public void handleRetirerEnseignant() {
+        Course selectedCourse = coursesTable.getSelectionModel().getSelectedItem();
+        if (selectedCourse == null) {
+            messageLabel.setText("Sélectionnez un cours.");
+            messageLabel.setTextFill(javafx.scene.paint.Color.RED);
+            return;
+        }
+
+        boolean success = CourseDAO.assignTeacherToCourse(selectedCourse.getId(), null);
+        if (success) {
+            selectedCourse.setTeacherName("Aucun");
+            selectedCourse.setTeacherId(-1); // optional if you track teacherId
+            coursesTable.refresh();
+            messageLabel.setText("Enseignant retiré avec succès.");
+            messageLabel.setTextFill(javafx.scene.paint.Color.GREEN);
+        } else {
+            messageLabel.setText("Erreur lors du retrait.");
+            messageLabel.setTextFill(javafx.scene.paint.Color.RED);
+        }
+    }
+
+
 
     @FXML
     public void handleAddCourse() {
@@ -190,4 +219,10 @@ public class CoursTabController {
         courseList = FXCollections.observableArrayList(CourseDAO.getAllCourses());
         coursesTable.setItems(courseList);
     }
+
+    private void refreshTeacherList() {
+        teacherList = FXCollections.observableArrayList(UserDAO.getAllTeachers());
+        teacherComboBox.setItems(teacherList);
+    }
+
 }
