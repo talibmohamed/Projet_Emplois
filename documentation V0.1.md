@@ -1,14 +1,14 @@
-# Projet Java - Gestion des Emplois du Temps
+# Projet Java – Gestion des Emplois du Temps
 
-## État actuel de l’implémentation
+## Etat actuel de l’implémentation
 
 ### Architecture
 
-- **JavaFX** (UI)
-- **MVC + DAO**
-- **FXML** pour les vues
-- **Supabase PostgreSQL** comme base de données distante
-- **Java 21** avec `module-info.java`
+- JavaFX pour l’interface graphique
+- MVC + DAO pour une séparation claire des responsabilités
+- FXML pour décrire les vues
+- Supabase PostgreSQL comme base de données distante
+- Java 21 avec `module-info.java`
 
 ---
 
@@ -21,22 +21,32 @@ src/
     │   └── org/example/projet_emplois/
     │       ├── controller/
     │       │   ├── LoginController.java
-    │       │   └── MainController.java
+    │       │   ├── MainController.java
+    │       │   ├── AdminDashboardController.java
+    │       │   ├── CoursTabController.java
+    │       │   └── RoomTabController.java
     │       ├── dao/
-    │       │   └── UserDAO.java
+    │       │   ├── UserDAO.java
+    │       │   ├── CourseDAO.java
+    │       │   ├── RoomDAO.java
+    │       │   └── EquipmentDAO.java
     │       ├── model/
     │       │   ├── User (abstract)
     │       │   ├── Admin, Student, Teacher
+    │       │   ├── Course.java
+    │       │   ├── Room.java
+    │       │   └── Equipment.java
     │       └── util/
     │           └── Database.java
     └── resources/
         └── org/example/projet_emplois/
             ├── views/
-            │   ├── main.fxml
             │   ├── login.fxml
+            │   ├── main.fxml
             │   ├── admin-dashboard.fxml
-            │   ├── student-dashboard.fxml
-            │   ├── teacher-dashboard.fxml
+            │   ├── students-tab.fxml
+            │   ├── cours-tab.fxml
+            │   └── rooms-tab.fxml
             └── styles/
                 └── style.css
 ```
@@ -47,36 +57,58 @@ src/
 
 ### Authentification
 
-- `login.fxml` contient le formulaire de connexion (email + mot de passe)
+- `login.fxml` : formulaire email + mot de passe
 - `LoginController.java` :
-  - récupère les identifiants saisis
-  - vérifie l’utilisateur via `UserDAO`
-  - charge la vue appropriée (`admin-dashboard.fxml`, etc.) dans `MainController`
+  - vérifie les identifiants via `UserDAO`
+  - redirige selon le rôle (`admin-dashboard.fxml`, etc.)
+  - utilise `MainController` pour afficher dynamiquement le tableau de bord
 
 ---
 
 ### Navigation
 
-- `MainController` gère le contenu central de l'application à l’aide d’un `BorderPane`
-- Une seule **fenêtre principale** utilisée tout au long de la session
-- L’interface est mise à jour via `mainController.loadDashboard(role)`
+- `MainController` centralise le `BorderPane` de la scène principale
+- Utilisation de `TabPane` pour chaque fonctionnalité (cours, salles, emplois du temps, etc.)
+- Les vues sont chargées dynamiquement via `fx:include` dans `admin-dashboard.fxml`
 
 ---
 
-### Interface Utilisateur
+## Interface Utilisateur
 
-- UI stylisée via `style.css`
-- Formulaire de connexion centré et compact
-- Champs de saisie et bouton personnalisés
-- Structure extensible pour ajouter des onglets dans les dashboards (via `TabPane`)
+- Design moderne avec `style.css`
+- Champs, boutons et composants stylisés
+- Composants dynamiques :
+  - TableView éditables
+  - ComboBox contextuelles
+  - Feedback utilisateur via `Label`
+
+---
+
+## Fonctionnalités Implémentées
+
+### Pour l'administrateur :
+
+- Gestion des cours
+  - Ajout, modification, suppression
+  - Affectation des enseignants
+
+- Gestion des enseignants
+  - Récupération via `UserDAO` (filtrés par rôle)
+
+- Gestion des salles
+  - Ajout / suppression
+  - Attribution d’équipements (avec quantité)
+  - Visualisation des équipements affectés
+
+- Gestion des équipements
+  - Ajout / suppression des types d’équipements
 
 ---
 
-## 🗓️ Prochaines Étapes
+## Prochaines Étapes
 
-- Créer les `DashboardController` pour chaque rôle
-- Ajouter des vues `TabPane` selon les fonctionnalités
-- Implémenter les fonctions côté admin (gestion des enseignants, salles, etc.)
-- Gérer les conflits et notifications côté enseignant/étudiant
-
----
+- Ajouter la gestion des emplois du temps avec `ScheduleController`
+- Implémenter le planning visuel par étudiant / enseignant
+- Gérer les notifications en fonction des conflits ou mises à jour
+- Ajouter des filtres de recherche et tri dynamique dans les tableaux
+- Sécuriser les accès et données sensibles
