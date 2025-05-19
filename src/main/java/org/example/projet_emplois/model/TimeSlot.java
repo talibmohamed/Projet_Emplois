@@ -1,25 +1,33 @@
 package org.example.projet_emplois.model;
 
-public class TimeSlot {
-    private int id;
-    private String day;
-    private String startTime;
-    private String endTime;
+import javafx.beans.property.*;
+import java.time.LocalTime;
 
-    public TimeSlot(int id, String day, String startTime, String endTime) {
-        this.id = id;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
+public class TimeSlot {
+    private final IntegerProperty id = new SimpleIntegerProperty();
+    private final StringProperty day = new SimpleStringProperty();
+    private final ObjectProperty<LocalTime> startTime = new SimpleObjectProperty<>();
+    private final ObjectProperty<LocalTime> endTime = new SimpleObjectProperty<>();
+
+    public TimeSlot(int id, String day, LocalTime startTime, LocalTime endTime) {
+        this.id.set(id);
+        this.day.set(day);
+        this.startTime.set(startTime);
+        this.endTime.set(endTime);
     }
 
-    public int getId() { return id; }
-    public String getDay() { return day; }
-    public String getStartTime() { return startTime; }
-    public String getEndTime() { return endTime; }
+    public int getId() { return id.get(); }
+    public String getDay() { return day.get(); }
+    public LocalTime getStartTime() { return startTime.get(); }
+    public LocalTime getEndTime() { return endTime.get(); }
 
-    public void setId(int id) { this.id = id; }
-    public void setDay(String day) { this.day = day; }
-    public void setStartTime(String startTime) { this.startTime = startTime; }
-    public void setEndTime(String endTime) { this.endTime = endTime; }
+    public IntegerProperty idProperty() { return id; }
+    public StringProperty dayProperty() { return day; }
+    public ObjectProperty<LocalTime> startTimeProperty() { return startTime; }
+    public ObjectProperty<LocalTime> endTimeProperty() { return endTime; }
+
+    @Override
+    public String toString() {
+        return day.get() + " - " + startTime.get() + " → " + endTime.get();
+    }
 }

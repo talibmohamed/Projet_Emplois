@@ -11,25 +11,28 @@
 
     <top>
         <Label fx:id="welcomeLabel" text="Bienvenue, Admin"
-               styleClass="label title" />
+               styleClass="label title"/>
     </top>
 
     <center>
         <TabPane fx:id="adminTabs">
             <Tab text="Utilisateurs" closable="false">
-                <Label text="Gérer les utilisateurs" />
+                <Label text="Gérer les utilisateurs"/>
             </Tab>
             <Tab text="Étudiants" closable="false">
-                <fx:include source="students-tab.fxml" />
+                <fx:include source="students-tab.fxml"/>
             </Tab>
             <Tab text="Salles" closable="false">
-                <fx:include source="rooms-tab.fxml" />
+                <fx:include source="rooms-tab.fxml"/>
             </Tab>
             <Tab text="Cours" closable="false">
-                <fx:include source="cours-tab.fxml" />
+                <fx:include source="cours-tab.fxml"/>
+            </Tab>
+            <Tab text="Créneaux horaires" closable="false">
+                <fx:include source="timeslot-tab.fxml"/>
             </Tab>
             <Tab text="Emplois du temps" closable="false">
-                <Label text="Gérer les emplois du temps" />
+                <Label text="Gérer les emplois du temps"/>
             </Tab>
         </TabPane>
     </center>

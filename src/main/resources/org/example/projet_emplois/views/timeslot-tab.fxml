@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projet_emplois.controller.TimeSlotTabController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Gestion des créneaux horaires"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <!-- Formulaire -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Jour:"/>
+        <ComboBox fx:id="dayComboBox" promptText="Choisir un jour" prefWidth="130"/>
+
+        <Label text="Début:"/>
+        <TextField fx:id="startTimeField" promptText="HH:MM" prefWidth="100"/>
+
+        <Label text="Fin:"/>
+        <TextField fx:id="endTimeField" promptText="HH:MM" prefWidth="100"/>
+
+        <Button text="Ajouter" onAction="#handleAddTimeSlot"/>
+        <Button text="Supprimer" onAction="#handleDeleteTimeSlot"/>
+    </HBox>
+
+    <!-- Message -->
+    <Label fx:id="messageLabel" textFill="green" style="-fx-font-weight: bold;"/>
+
+    <!-- Tableau des créneaux -->
+    <TableView fx:id="timeslotTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="dayColumn" text="Jour" prefWidth="180"/>
+            <TableColumn fx:id="startTimeColumn" text="Heure Début" prefWidth="180"/>
+            <TableColumn fx:id="endTimeColumn" text="Heure Fin" prefWidth="180"/>
+        </columns>
+    </TableView>
+</VBox>
