@@ -75,3 +75,11 @@
 .tab:selected .tab-label {
     -fx-text-fill: #000000;
 }
+
+.danger-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 4 10;
+    -fx-background-radius: 4;
+}

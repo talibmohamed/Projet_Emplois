@@ -31,6 +31,9 @@
             <Tab text="Créneaux horaires" closable="false">
                 <fx:include source="timeslot-tab.fxml"/>
             </Tab>
+            <Tab text="Schedules" closable="false">
+                <fx:include source="ScheduleTab.fxml"/>
+            </Tab>
             <Tab text="Emplois du temps" closable="false">
                 <Label text="Gérer les emplois du temps"/>
             </Tab>

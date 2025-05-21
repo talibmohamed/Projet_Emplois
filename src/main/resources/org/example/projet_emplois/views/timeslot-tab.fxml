@@ -15,13 +15,20 @@
     <!-- Formulaire -->
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Jour:"/>
-        <ComboBox fx:id="dayComboBox" promptText="Choisir un jour" prefWidth="130"/>
+        <ComboBox fx:id="dayComboBox" promptText="Auto" prefWidth="120" disable="true"/>
+
+        <Label text="Date:"/>
+        <DatePicker fx:id="datePicker" prefWidth="130"/>
 
         <Label text="Début:"/>
-        <TextField fx:id="startTimeField" promptText="HH:MM" prefWidth="100"/>
+        <ComboBox fx:id="startHourComboBox" prefWidth="60"/>
+        <Label text=":"/>
+        <ComboBox fx:id="startMinuteComboBox" prefWidth="60"/>
 
         <Label text="Fin:"/>
-        <TextField fx:id="endTimeField" promptText="HH:MM" prefWidth="100"/>
+        <ComboBox fx:id="endHourComboBox" prefWidth="60"/>
+        <Label text=":"/>
+        <ComboBox fx:id="endMinuteComboBox" prefWidth="60"/>
 
         <Button text="Ajouter" onAction="#handleAddTimeSlot"/>
         <Button text="Supprimer" onAction="#handleDeleteTimeSlot"/>
@@ -33,9 +40,10 @@
     <!-- Tableau des créneaux -->
     <TableView fx:id="timeslotTable" prefHeight="300">
         <columns>
-            <TableColumn fx:id="dayColumn" text="Jour" prefWidth="180"/>
-            <TableColumn fx:id="startTimeColumn" text="Heure Début" prefWidth="180"/>
-            <TableColumn fx:id="endTimeColumn" text="Heure Fin" prefWidth="180"/>
+            <TableColumn fx:id="dayColumn" text="Jour" prefWidth="100"/>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="130"/>
+            <TableColumn fx:id="startTimeColumn" text="Heure Début" prefWidth="130"/>
+            <TableColumn fx:id="endTimeColumn" text="Heure Fin" prefWidth="130"/>
         </columns>
     </TableView>
 </VBox>

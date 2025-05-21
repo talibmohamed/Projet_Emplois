@@ -4,6 +4,7 @@ import org.example.projet_emplois.model.TimeSlot;
 import org.example.projet_emplois.tools.Database;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class TimeSlotDAO {
 
     public static List<TimeSlot> getAllTimeSlots() {
         List<TimeSlot> slots = new ArrayList<>();
-        String query = "SELECT * FROM timeslots ORDER BY day, start_time";
+        String query = "SELECT * FROM timeslots ORDER BY date, start_time";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -23,7 +24,8 @@ public class TimeSlotDAO {
                         rs.getInt("id"),
                         rs.getString("day"),
                         rs.getTime("start_time").toLocalTime(),
-                        rs.getTime("end_time").toLocalTime()
+                        rs.getTime("end_time").toLocalTime(),
+                        rs.getDate("date").toLocalDate()
                 ));
             }
 
@@ -34,20 +36,27 @@ public class TimeSlotDAO {
         return slots;
     }
 
-    public static boolean addTimeSlot(String day, LocalTime start, LocalTime end) {
-        String query = "INSERT INTO timeslots (day, start_time, end_time) VALUES (?, ?, ?)";
+    public static TimeSlotResult addTimeSlot(String day, LocalTime start, LocalTime end, LocalDate date) {
+        String query = "INSERT INTO timeslots (day, start_time, end_time, date) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, day);
             stmt.setTime(2, Time.valueOf(start));
             stmt.setTime(3, Time.valueOf(end));
-            return stmt.executeUpdate() > 0;
+            stmt.setDate(4, Date.valueOf(date));
+
+            stmt.executeUpdate();
+            return TimeSlotResult.SUCCESS;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            if ("23505".equals(e.getSQLState())) {
+                return TimeSlotResult.DUPLICATE;
+            } else {
+                e.printStackTrace();
+                return TimeSlotResult.ERROR;
+            }
         }
-        return false;
     }
 
     public static boolean deleteTimeSlot(int id) {

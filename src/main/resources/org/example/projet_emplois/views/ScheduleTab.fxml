@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projet_emplois.controller.ScheduleTabController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Planifier un cours" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <!-- Form Inputs -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="Cours:"/>
+        <ComboBox fx:id="courseComboBox" promptText="Choisir un cours" prefWidth="180"/>
+
+        <Label text="Salle:"/>
+        <ComboBox fx:id="roomComboBox" promptText="Choisir une salle" prefWidth="150"/>
+
+        <Label text="Créneau:"/>
+        <ComboBox fx:id="timeslotComboBox" promptText="Date - Heure" prefWidth="220"/>
+
+        <Button text="Ajouter" onAction="#handleAddSchedule"/>
+    </HBox>
+
+    <!-- Message -->
+    <Label fx:id="messageLabel" textFill="green" style="-fx-font-weight: bold;"/>
+
+    <!-- Schedule Table -->
+    <TableView fx:id="scheduleTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="courseColumn" text="Cours" prefWidth="150"/>
+            <TableColumn fx:id="roomColumn" text="Salle" prefWidth="100"/>
+            <TableColumn fx:id="dayColumn" text="Jour" prefWidth="100"/>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
+            <TableColumn fx:id="timeColumn" text="Heure" prefWidth="150"/>
+        </columns>
+    </TableView>
+</VBox>

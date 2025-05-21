@@ -14,13 +14,13 @@ CREATE TABLE IF NOT EXISTS rooms (
                                      capacity INTEGER NOT NULL
 );
 
--- EQUIPMENT TABLE (Equipment types)
+-- EQUIPMENT TABLE (types of equipment)
 CREATE TABLE IF NOT EXISTS equipment (
                                          id SERIAL PRIMARY KEY,
                                          name TEXT NOT NULL UNIQUE
 );
 
--- ROOM_EQUIPMENT TABLE (Many-to-many + quantity)
+-- ROOM_EQUIPMENT TABLE (many-to-many with quantity)
 CREATE TABLE IF NOT EXISTS room_equipment (
                                               room_id INTEGER REFERENCES rooms(id) ON DELETE CASCADE,
     equipment_id INTEGER REFERENCES equipment(id) ON DELETE CASCADE,
@@ -39,24 +39,30 @@ CREATE TABLE IF NOT EXISTS courses (
 -- TIME SLOTS TABLE
 CREATE TABLE IF NOT EXISTS timeslots (
                                          id SERIAL PRIMARY KEY,
-                                         day VARCHAR(10) NOT NULL, -- e.g., Monday
+                                         day VARCHAR(10) NOT NULL,
+    date DATE NOT NULL,
     start_time TIME NOT NULL,
-    end_time TIME NOT NULL
+    end_time TIME NOT NULL,
+    CONSTRAINT unique_timeslot UNIQUE (date, start_time, end_time),
+    CONSTRAINT valid_time_range CHECK (end_time > start_time)
     );
 
--- SCHEDULE TABLE (Emploi du Temps)
+-- SCHEDULE TABLE
 CREATE TABLE IF NOT EXISTS schedule (
                                         id SERIAL PRIMARY KEY,
                                         course_id INTEGER REFERENCES courses(id) ON DELETE CASCADE,
     room_id INTEGER REFERENCES rooms(id) ON DELETE SET NULL,
-    timeslot_id INTEGER REFERENCES timeslots(id) ON DELETE CASCADE
+    timeslot_id INTEGER REFERENCES timeslots(id) ON DELETE CASCADE,
+    CONSTRAINT unique_room_timeslot UNIQUE (room_id, timeslot_id),
+    CONSTRAINT unique_course_timeslot UNIQUE (course_id, timeslot_id)
     );
 
 -- ENROLLMENT TABLE (students enrolled in courses)
 CREATE TABLE IF NOT EXISTS enrollment (
                                           id SERIAL PRIMARY KEY,
                                           student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    course_id INTEGER REFERENCES courses(id) ON DELETE CASCADE
+    course_id INTEGER REFERENCES courses(id) ON DELETE CASCADE,
+    CONSTRAINT unique_enrollment UNIQUE (student_id, course_id)
     );
 
 -- NOTIFICATIONS TABLE
