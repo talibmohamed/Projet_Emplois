@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projet_emplois.controller.EnrollmentTabController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Inscription des étudiants aux cours"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <!-- Form Inputs -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Étudiant:"/>
+        <ComboBox fx:id="studentComboBox" promptText="Choisir un étudiant" prefWidth="200"/>
+
+        <Label text="Cours:"/>
+        <ComboBox fx:id="courseComboBox" promptText="Choisir un cours" prefWidth="200"/>
+
+        <Button text="Ajouter" onAction="#handleEnroll"/>
+    </HBox>
+
+    <!-- Message -->
+    <Label fx:id="messageLabel" textFill="green" style="-fx-font-weight: bold;" />
+
+    <!-- Table of Enrollments -->
+    <TableView fx:id="enrollmentTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="studentColumn" text="Étudiant" prefWidth="200"/>
+            <TableColumn fx:id="courseColumn" text="Cours" prefWidth="200"/>
+        </columns>
+    </TableView>
+</VBox>

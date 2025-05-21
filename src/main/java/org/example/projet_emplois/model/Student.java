@@ -17,7 +17,21 @@ public class Student extends User {
     public String getStudentId() {
         return "S-" + id;
     }
-    public List<Schedule> viewSchedule() { return null; }
-    public void receiveNotification(String msg) {}
-    public String viewRoomInfo() { return ""; }
+
+    public List<Schedule> viewSchedule() {
+        return null;
+    }
+
+    public void receiveNotification(String msg) {
+        // Implementation to handle notification
+    }
+
+    public String viewRoomInfo() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + email + ")";
+    }
 }

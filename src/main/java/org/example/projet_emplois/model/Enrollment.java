@@ -1,21 +1,48 @@
 package org.example.projet_emplois.model;
 
-public class Enrollment {
-    private int id;
-    private int studentId;
-    private int courseId;
+import javafx.beans.property.*;
 
-    public Enrollment(int id, int studentId, int courseId) {
-        this.id = id;
-        this.studentId = studentId;
-        this.courseId = courseId;
+public class Enrollment {
+    private final IntegerProperty id = new SimpleIntegerProperty();
+    private final StringProperty studentName = new SimpleStringProperty();
+    private final StringProperty courseName = new SimpleStringProperty();
+
+    public Enrollment(int id, String studentName, String courseName) {
+        this.id.set(id);
+        this.studentName.set(studentName);
+        this.courseName.set(courseName);
     }
 
-    public int getId() { return id; }
-    public int getStudentId() { return studentId; }
-    public int getCourseId() { return courseId; }
+    // ID
+    public int getId() {
+        return id.get();
+    }
 
-    public void setId(int id) { this.id = id; }
-    public void setStudentId(int studentId) { this.studentId = studentId; }
-    public void setCourseId(int courseId) { this.courseId = courseId; }
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+    // Student name
+    public String getStudentName() {
+        return studentName.get();
+    }
+
+    public StringProperty studentNameProperty() {
+        return studentName;
+    }
+
+    // Course name
+    public String getCourseName() {
+        return courseName.get();
+    }
+
+    public StringProperty courseNameProperty() {
+        return courseName;
+    }
+
+    // Optional: toString() for ComboBox or debug
+    @Override
+    public String toString() {
+        return studentName.get() + " → " + courseName.get();
+    }
 }

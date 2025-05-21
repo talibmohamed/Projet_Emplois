@@ -34,6 +34,9 @@
             <Tab text="Schedules" closable="false">
                 <fx:include source="ScheduleTab.fxml"/>
             </Tab>
+            <Tab text="Inscriptions" closable="false">
+                <fx:include source="EnrollmentTab.fxml"/>
+            </Tab>
             <Tab text="Emplois du temps" closable="false">
                 <Label text="Gérer les emplois du temps"/>
             </Tab>
