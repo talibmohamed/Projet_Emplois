@@ -112,6 +112,24 @@ public class UserDAO {
         }
     }
 
+    public static boolean addTeacher(int id, String name, String email, String password) {
+        String sql = "INSERT INTO users (id, name, email, password, role) VALUES (?, ?, ?, ?, 'teacher')";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            stmt.setString(2, name);
+            stmt.setString(3, email.toLowerCase());
+            stmt.setString(4, password);
+            return stmt.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            System.err.println("[addTeacher] SQL Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+
     public static boolean deleteUserById(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
         try (Connection conn = Database.getConnection();
