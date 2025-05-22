@@ -15,14 +15,16 @@ public class ScheduleDAO {
         List<Schedule> schedules = new ArrayList<>();
 
         String query = """
-            SELECT s.id, c.name AS course_name, r.name AS room_name,
-                   t.day, t.date, t.start_time, t.end_time
-            FROM schedule s
-            JOIN courses c ON s.course_id = c.id
-            LEFT JOIN rooms r ON s.room_id = r.id
-            JOIN timeslots t ON s.timeslot_id = t.id
-            ORDER BY t.date, t.start_time
-        """;
+        SELECT s.id, c.name AS course_name, r.name AS room_name,
+               t.day, t.date, t.start_time, t.end_time,
+               u.name AS teacher
+        FROM schedule s
+        JOIN courses c ON s.course_id = c.id
+        LEFT JOIN rooms r ON s.room_id = r.id
+        JOIN timeslots t ON s.timeslot_id = t.id
+        LEFT JOIN users u ON c.teacher_id = u.id
+        ORDER BY t.date, t.start_time
+    """;
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -36,7 +38,8 @@ public class ScheduleDAO {
                         rs.getString("day"),
                         rs.getDate("date").toLocalDate(),
                         rs.getTime("start_time").toLocalTime(),
-                        rs.getTime("end_time").toLocalTime()
+                        rs.getTime("end_time").toLocalTime(),
+                        rs.getString("teacher")
                 ));
             }
 
@@ -46,6 +49,7 @@ public class ScheduleDAO {
 
         return schedules;
     }
+
 
     public static boolean addSchedule(int courseId, Integer roomId, int timeslotId) {
         String conflictQuery = """

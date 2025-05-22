@@ -13,9 +13,15 @@ public class Schedule {
     private final StringProperty day = new SimpleStringProperty();
     private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalTime> startTime = new SimpleObjectProperty<>();
-    private final ObjectProperty<LocalTime> endTime = new SimpleObjectProperty<>();
+    private final ObjectProperty<LocalTime> endTime = new SimpleObjectProperty();
+    private final StringProperty teacher = new SimpleStringProperty();  // ✅ Added
 
-    public Schedule(int id, String courseName, String roomName, String day, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    private final StringProperty teacherName = new SimpleStringProperty();
+
+
+    public Schedule(int id, String courseName, String roomName, String day,
+                    LocalDate date, LocalTime startTime, LocalTime endTime,
+                    String teacherName) {
         this.id.set(id);
         this.courseName.set(courseName);
         this.roomName.set(roomName != null ? roomName : "—");
@@ -23,15 +29,18 @@ public class Schedule {
         this.date.set(date);
         this.startTime.set(startTime);
         this.endTime.set(endTime);
+        this.teacherName.set(teacherName != null ? teacherName : "—");
     }
 
-    public int getId() {
-        return id.get();
+    public String getTeacherName() {
+        return teacherName.get();
     }
 
-    public IntegerProperty idProperty() {
-        return id;
+    public StringProperty teacherNameProperty() {
+        return teacherName;
     }
+
+
 
     public String getCourseName() {
         return courseName.get();
@@ -81,8 +90,24 @@ public class Schedule {
         return endTime;
     }
 
+    public String getTeacher() {
+        return teacher.get();
+    }
+
+    public StringProperty teacherProperty() {
+        return teacher;
+    }
+
     public StringProperty timeRangeProperty() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm");
         return new SimpleStringProperty(startTime.get().format(fmt) + " → " + endTime.get().format(fmt));
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public String getClassName() {
+        return roomName.get();
     }
 }
