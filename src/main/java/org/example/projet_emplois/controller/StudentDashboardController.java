@@ -180,7 +180,7 @@ public class StudentDashboardController {
                 new Label(entry.getCourseName()),
                 new Label("Heure: " + entry.timeRangeProperty().get()),
                 new Label("Salle: " + entry.getRoomName()),
-                new Label("Prof: " + teacher)
+                new Label("Prof: " + entry.getTeacherName())
         );
         return box;
     }

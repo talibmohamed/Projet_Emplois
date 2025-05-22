@@ -15,13 +15,11 @@ public class Main extends Application {
         stage.setTitle("Emploi du Temps");
         stage.setScene(scene);
 
-        // Set minimum width and height
         stage.setMinWidth(800);
         stage.setMinHeight(600);
 
         stage.show();
 
-        // load login view initially
         MainController controller = loader.getController();
         controller.loadDashboard("login");
     }

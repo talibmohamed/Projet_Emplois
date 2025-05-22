@@ -14,7 +14,7 @@ public class Schedule {
     private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalTime> startTime = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalTime> endTime = new SimpleObjectProperty();
-    private final StringProperty teacher = new SimpleStringProperty();  // ✅ Added
+    private final StringProperty teacher = new SimpleStringProperty();
 
     private final StringProperty teacherName = new SimpleStringProperty();
 
