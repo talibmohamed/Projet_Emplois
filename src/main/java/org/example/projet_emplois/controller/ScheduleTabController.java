@@ -89,10 +89,10 @@ public class ScheduleTabController {
                     boolean deleted = ScheduleDAO.deleteSchedule(selected.getId());
 
                     if (deleted) {
-                        messageLabel.setText("🗑️ Cours déplanifié.");
+                        messageLabel.setText("🗑Cours déplanifié.");
                         loadScheduleTable();
                     } else {
-                        messageLabel.setText("❌ Erreur lors de la suppression.");
+                        messageLabel.setText("Erreur lors de la suppression.");
                     }
                 });
             }

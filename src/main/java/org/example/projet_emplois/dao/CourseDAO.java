@@ -29,7 +29,7 @@ public class CourseDAO {
 
             while (rs.next()) {
                 int teacherId = rs.getInt("teacher_id");
-                boolean isTeacherNull = rs.wasNull();  // because getInt returns 0 if NULL
+                boolean isTeacherNull = rs.wasNull();
 
                 courses.add(new Course(
                         rs.getInt("id"),

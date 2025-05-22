@@ -57,10 +57,10 @@ public class EnrollmentTabController {
         boolean success = EnrollmentDAO.addEnrollment(student.getId(), course.getId());
 
         if (success) {
-            messageLabel.setText("✅ Étudiant inscrit au cours.");
+            messageLabel.setText("Étudiant inscrit au cours.");
             loadEnrollmentTable();
         } else {
-            messageLabel.setText("❌ Étudiant déjà inscrit à ce cours.");
+            messageLabel.setText("Étudiant déjà inscrit à ce cours.");
         }
     }
 
@@ -76,10 +76,10 @@ public class EnrollmentTabController {
                     Enrollment enrollment = getTableView().getItems().get(getIndex());
                     boolean removed = EnrollmentDAO.removeEnrollment(enrollment.getId());
                     if (removed) {
-                        messageLabel.setText("🗑️ Étudiant désinscrit.");
+                        messageLabel.setText("Étudiant désinscrit.");
                         loadEnrollmentTable();
                     } else {
-                        messageLabel.setText("❌ Erreur de suppression.");
+                        messageLabel.setText("Erreur de suppression.");
                     }
                 });
             }

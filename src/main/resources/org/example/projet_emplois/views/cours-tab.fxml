@@ -10,11 +10,9 @@
       fx:controller="org.example.projet_emplois.controller.CoursTabController"
       spacing="15" style="-fx-padding: 20;">
 
-    <!-- Title -->
     <Label text="Gestion des cours et affectation des enseignants"
            styleClass="label title" />
 
-    <!-- Editable Course Table -->
     <TableView fx:id="coursesTable" editable="true" prefHeight="300" styleClass="table-view">
         <columns>
             <TableColumn fx:id="courseNameColumn" text="Nom du cours" editable="true"/>
@@ -23,14 +21,12 @@
         </columns>
     </TableView>
 
-    <!-- Affectation -->
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Affecter enseignant :" />
         <ComboBox fx:id="teacherComboBox" promptText="Choisir un enseignant" />
         <Button fx:id="affecterButton" text="Affecter" onAction="#handleAffecter" />
         <Button fx:id="retirerButton" text="Retirer" onAction="#handleRetirerEnseignant" />
     </HBox>
-    <!-- Add/Delete Section -->
     <Separator />
     <Label text="Ajouter un nouveau cours"
            styleClass="label title" />
@@ -54,6 +50,5 @@
         <Button text="Supprimer" onAction="#handleDeleteCourse" styleClass="button" />
     </HBox>
 
-    <!-- Feedback -->
     <Label fx:id="messageLabel" textFill="green" />
 </VBox>

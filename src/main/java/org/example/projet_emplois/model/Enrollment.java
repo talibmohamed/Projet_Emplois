@@ -13,7 +13,6 @@ public class Enrollment {
         this.courseName.set(courseName);
     }
 
-    // ID
     public int getId() {
         return id.get();
     }
@@ -22,7 +21,6 @@ public class Enrollment {
         return id;
     }
 
-    // Student name
     public String getStudentName() {
         return studentName.get();
     }
@@ -31,7 +29,6 @@ public class Enrollment {
         return studentName;
     }
 
-    // Course name
     public String getCourseName() {
         return courseName.get();
     }
@@ -40,7 +37,7 @@ public class Enrollment {
         return courseName;
     }
 
-    // Optional: toString() for ComboBox or debug
+
     @Override
     public String toString() {
         return studentName.get() + " → " + courseName.get();

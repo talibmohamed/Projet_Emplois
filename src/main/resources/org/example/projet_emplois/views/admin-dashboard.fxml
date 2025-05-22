@@ -16,9 +16,6 @@
 
     <center>
         <TabPane fx:id="adminTabs">
-            <Tab text="Utilisateurs" closable="false">
-                <Label text="Gérer les utilisateurs"/>
-            </Tab>
             <Tab text="Étudiants" closable="false">
                 <fx:include source="students-tab.fxml"/>
             </Tab>
