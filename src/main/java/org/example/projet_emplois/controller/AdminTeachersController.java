@@ -6,9 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.projet_emplois.dao.UserDAO;
-import org.example.projet_emplois.model.Student;
+import org.example.projet_emplois.model.Teacher;
 
-public class AdminStudentsController {
+public class AdminTeachersController {
 
     @FXML private TextField idField;
     @FXML private TextField nameField;
@@ -16,10 +16,10 @@ public class AdminStudentsController {
     @FXML private PasswordField passwordField;
     @FXML private Label messageLabel;
 
-    @FXML private TableView<Student> studentsTable;
-    @FXML private TableColumn<Student, Integer> idColumn;
-    @FXML private TableColumn<Student, String> nameColumn;
-    @FXML private TableColumn<Student, String> emailColumn;
+    @FXML private TableView<Teacher> teachersTable;
+    @FXML private TableColumn<Teacher, Integer> idColumn;
+    @FXML private TableColumn<Teacher, String> nameColumn;
+    @FXML private TableColumn<Teacher, String> emailColumn;
 
     @FXML
     public void initialize() {
@@ -31,7 +31,7 @@ public class AdminStudentsController {
     }
 
     @FXML
-    private void handleAddStudent() {
+    private void handleAddTeacher() {
         try {
             int id = Integer.parseInt(idField.getText().trim());
             String name = nameField.getText().trim();
@@ -43,9 +43,9 @@ public class AdminStudentsController {
                 return;
             }
 
-            boolean success = UserDAO.addStudent(id, name, email, password);
+            boolean success = UserDAO.addTeacher(id, name, email, password);
             if (success) {
-                messageLabel.setText("Étudiant ajouté !");
+                messageLabel.setText("Enseignant ajouté !");
                 idField.clear(); nameField.clear(); emailField.clear(); passwordField.clear();
                 refreshTable();
             } else {
@@ -57,16 +57,16 @@ public class AdminStudentsController {
     }
 
     @FXML
-    private void handleDeleteStudent() {
-        Student selected = studentsTable.getSelectionModel().getSelectedItem();
+    private void handleDeleteTeacher() {
+        Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            messageLabel.setText("Sélectionnez un étudiant.");
+            messageLabel.setText("Sélectionnez un enseignant.");
             return;
         }
 
         boolean success = UserDAO.deleteUserById(selected.getId());
         if (success) {
-            messageLabel.setText("Étudiant supprimé.");
+            messageLabel.setText("Enseignant supprimé.");
             refreshTable();
         } else {
             messageLabel.setText("Erreur lors de la suppression.");
@@ -74,7 +74,7 @@ public class AdminStudentsController {
     }
 
     private void refreshTable() {
-        ObservableList<Student> students = FXCollections.observableArrayList(UserDAO.getAllStudents());
-        studentsTable.setItems(students);
+        ObservableList<Teacher> teachers = FXCollections.observableArrayList(UserDAO.getAllTeachers());
+        teachersTable.setItems(teachers);
     }
 }

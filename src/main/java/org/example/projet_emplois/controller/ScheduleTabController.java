@@ -83,16 +83,16 @@ public class ScheduleTabController {
             private final Button deleteButton = new Button("Supprimer");
 
             {
-                deleteButton.getStyleClass().add("danger-button"); // optional style class
+                deleteButton.getStyleClass().add("danger-button");
                 deleteButton.setOnAction(event -> {
                     Schedule selected = getTableView().getItems().get(getIndex());
                     boolean deleted = ScheduleDAO.deleteSchedule(selected.getId());
 
                     if (deleted) {
-                        messageLabel.setText("🗑️ Cours déplanifié.");
+                        messageLabel.setText("🗑Cours déplanifié.");
                         loadScheduleTable();
                     } else {
-                        messageLabel.setText("❌ Erreur lors de la suppression.");
+                        messageLabel.setText("Erreur lors de la suppression.");
                     }
                 });
             }

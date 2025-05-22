@@ -21,7 +21,7 @@ public class EquipmentDAO {
                 list.add(new Equipment(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        0 // Quantity is not stored here, it's in room_equipment
+                        0
                 ));
             }
 

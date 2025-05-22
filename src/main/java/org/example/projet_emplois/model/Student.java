@@ -23,7 +23,6 @@ public class Student extends User {
     }
 
     public void receiveNotification(String msg) {
-        // Implementation to handle notification
     }
 
     public String viewRoomInfo() {

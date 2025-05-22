@@ -56,18 +56,14 @@ public class CoursTabController {
             messageLabel.setTextFill(javafx.scene.paint.Color.GREEN);
         });
 
-        // Read-only Teacher Column
         teacherColumn.setCellValueFactory(data -> data.getValue().teacherNameProperty());
         teacherColumn.setEditable(false);
 
-        // Load courses
         courseList = FXCollections.observableArrayList(CourseDAO.getAllCourses());
         coursesTable.setItems(courseList);
 
-        // Initial load of teachers
         refreshTeacherList();
 
-        // Display teacher name in ComboBox
         teacherComboBox.setCellFactory(listView -> new ListCell<>() {
             @Override
             protected void updateItem(Teacher teacher, boolean empty) {
@@ -125,7 +121,7 @@ public class CoursTabController {
         boolean success = CourseDAO.assignTeacherToCourse(selectedCourse.getId(), null);
         if (success) {
             selectedCourse.setTeacherName("Aucun");
-            selectedCourse.setTeacherId(-1); // optional if you track teacherId
+            selectedCourse.setTeacherId(-1);
             coursesTable.refresh();
             messageLabel.setText("Enseignant retiré avec succès.");
             messageLabel.setTextFill(javafx.scene.paint.Color.GREEN);

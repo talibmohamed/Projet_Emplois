@@ -12,7 +12,6 @@
     <Label text="Gestion des créneaux horaires"
            style="-fx-font-size: 16px; -fx-font-weight: bold;" />
 
-    <!-- Formulaire -->
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Jour:"/>
         <ComboBox fx:id="dayComboBox" promptText="Auto" prefWidth="120" disable="true"/>
@@ -34,10 +33,8 @@
         <Button text="Supprimer" onAction="#handleDeleteTimeSlot"/>
     </HBox>
 
-    <!-- Message -->
     <Label fx:id="messageLabel" textFill="green" style="-fx-font-weight: bold;"/>
 
-    <!-- Tableau des créneaux -->
     <TableView fx:id="timeslotTable" prefHeight="300">
         <columns>
             <TableColumn fx:id="dayColumn" text="Jour" prefWidth="100"/>

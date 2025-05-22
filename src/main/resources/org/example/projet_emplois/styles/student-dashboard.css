@@ -1,0 +1,45 @@
+.root {
+    -fx-background-color: #f5f8fb;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.label.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.calendar-cell {
+    -fx-border-color: #ddd;
+    -fx-border-width: 0.5;
+}
+
+.course-block {
+    -fx-background-color: #cce5ff;
+    -fx-border-color: #99c;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 5;
+}
+
+
+.course-block > .label {
+    -fx-wrap-text: true;
+}
+
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b2bec3;
+    -fx-border-radius: 4;
+}
+
+.button {
+    -fx-background-color: #0984e3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+.button:hover {
+    -fx-background-color: #74b9ff;
+}

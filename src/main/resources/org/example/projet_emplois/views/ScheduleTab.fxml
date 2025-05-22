@@ -10,7 +10,6 @@
 
     <Label text="Planifier un cours" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
 
-    <!-- Form Inputs -->
     <HBox spacing="15" alignment="CENTER_LEFT">
         <Label text="Cours:"/>
         <ComboBox fx:id="courseComboBox" promptText="Choisir un cours" prefWidth="180"/>
@@ -24,10 +23,8 @@
         <Button text="Ajouter" onAction="#handleAddSchedule"/>
     </HBox>
 
-    <!-- Message -->
     <Label fx:id="messageLabel" textFill="green" style="-fx-font-weight: bold;"/>
 
-    <!-- Schedule Table -->
     <TableView fx:id="scheduleTable" prefHeight="300">
         <columns>
             <TableColumn fx:id="courseColumn" text="Cours" prefWidth="150"/>
