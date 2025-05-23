@@ -14,7 +14,6 @@
            style="-fx-font-size: 16px; -fx-font-weight: bold;" />
 
     <HBox spacing="10">
-        <TextField fx:id="idField" promptText="ID" />
         <TextField fx:id="nameField" promptText="Nom complet" />
         <TextField fx:id="emailField" promptText="Adresse email" />
         <PasswordField fx:id="passwordField" promptText="Mot de passe" />

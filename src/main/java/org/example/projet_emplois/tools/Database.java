@@ -5,16 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private static final String URL = "jdbc:postgresql://db.ccrxqxjndnxzwltvpyge.supabase.co:5432/postgres";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "AayqYCkTGUMCGP9z";
+    private static final String URL = "jdbc:postgresql://db.ccrxqxjndnxzwltvpyge.supabase.co:5432/postgres?user=postgres&password=AayqYCkTGUMCGP9z";
 
     private static Connection connection = null;
 
     public static Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                connection = DriverManager.getConnection(URL);
                 System.out.println("[DB] Connected to Supabase PostgreSQL.");
             }
         } catch (SQLException e) {

@@ -32,29 +32,25 @@ public class AdminStudentsController {
 
     @FXML
     private void handleAddStudent() {
-        try {
-            int id = Integer.parseInt(idField.getText().trim());
-            String name = nameField.getText().trim();
-            String email = emailField.getText().trim();
-            String password = passwordField.getText().trim();
+        String name = nameField.getText().trim();
+        String email = emailField.getText().trim();
+        String password = passwordField.getText().trim();
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                messageLabel.setText("Tous les champs sont requis.");
-                return;
-            }
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            messageLabel.setText("Tous les champs sont requis.");
+            return;
+        }
 
-            boolean success = UserDAO.addStudent(id, name, email, password);
-            if (success) {
-                messageLabel.setText("Étudiant ajouté !");
-                idField.clear(); nameField.clear(); emailField.clear(); passwordField.clear();
-                refreshTable();
-            } else {
-                messageLabel.setText("Erreur : ID ou email déjà utilisé ?");
-            }
-        } catch (NumberFormatException e) {
-            messageLabel.setText("ID invalide.");
+        boolean success = UserDAO.addStudent(name, email, password);
+        if (success) {
+            messageLabel.setText("Étudiant ajouté !");
+            nameField.clear(); emailField.clear(); passwordField.clear();
+            refreshTable();
+        } else {
+            messageLabel.setText("Erreur : email déjà utilisé ?");
         }
     }
+
 
     @FXML
     private void handleDeleteStudent() {

@@ -95,15 +95,14 @@ public class UserDAO {
         return teachers;
     }
 
-    public static boolean addStudent(int id, String name, String email, String password) {
-        String sql = "INSERT INTO users (id, name, email, password, role) VALUES (?, ?, ?, ?, 'student')";
+    public static boolean addStudent(String name, String email, String password) {
+        String sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'student')";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            stmt.setString(2, name);
-            stmt.setString(3, email.toLowerCase());
-            stmt.setString(4, password);
+            stmt.setString(1, name);
+            stmt.setString(2, email.toLowerCase());
+            stmt.setString(3, password);
             return stmt.executeUpdate() == 1;
 
         } catch (SQLException e) {
@@ -112,15 +111,15 @@ public class UserDAO {
         }
     }
 
-    public static boolean addTeacher(int id, String name, String email, String password) {
-        String sql = "INSERT INTO users (id, name, email, password, role) VALUES (?, ?, ?, ?, 'teacher')";
+
+    public static boolean addTeacher(String name, String email, String password) {
+        String sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'teacher')";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
-            stmt.setString(2, name);
-            stmt.setString(3, email.toLowerCase());
-            stmt.setString(4, password);
+            stmt.setString(1, name);
+            stmt.setString(2, email.toLowerCase());
+            stmt.setString(3, password);
             return stmt.executeUpdate() == 1;
 
         } catch (SQLException e) {
@@ -128,6 +127,7 @@ public class UserDAO {
             return false;
         }
     }
+
 
 
     public static boolean deleteUserById(int id) {
