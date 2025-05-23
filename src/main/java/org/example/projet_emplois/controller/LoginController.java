@@ -24,6 +24,11 @@ public class LoginController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
+        if (email.isEmpty() || password.isEmpty()) {
+            errorLabel.setText("Email and password cannot be empty.");
+            return;
+        }
+
         User user = UserDAO.findByEmailAndPassword(email, password);
         if (user == null) {
             errorLabel.setText("Invalid credentials.");
